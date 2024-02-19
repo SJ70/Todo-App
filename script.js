@@ -3,6 +3,9 @@ import getCheckBoxBlankSvgEl from './js/svgElements/checkBoxBlank.js';
 import getDeleteSvgEl from './js/svgElements/delete.js';
 import getEditSvgEl from './js/svgElements/edit.js';
 
+const DATA_PARSER = '|||||';
+const DATA_KEY = 'items_data';
+
 const createBtn = document.getElementById("create-btn");
 const itemsEl = document.getElementById("items");
 
@@ -96,19 +99,19 @@ function remove(itemEl, item) {
 }
 
 function saveChange() {
-    let data = itemList.map(JSON.stringify).join('|||||');
+    let data = itemList.map(JSON.stringify).join(DATA_PARSER);
     // console.log(data);
-    localStorage.setItem('itemList', data);
-    // console.log('saved', data);
+    localStorage.setItem(DATA_KEY, data);
+    console.log('saved :', data);
 }
 
 window.onload = function() {
-    const data = localStorage.getItem('itemList');
+    const data = localStorage.getItem(DATA_KEY);
     // console.log(data)
     if (!data) {
         return;
     }
-    const savedItemList = data.split('|||||').map(JSON.parse);
+    const savedItemList = data.split(DATA_PARSER).map(JSON.parse);
     // console.log(savedItemList);
 
     itemList = savedItemList.sort((i1, i2) => - i1.date + i2.date);
@@ -116,7 +119,5 @@ window.onload = function() {
         const itemEl = createItemEl(item);
         itemsEl.append(itemEl);
     }
-    console.log("item",itemList)
+    console.log("loaded : ",itemList)
 }
-
-// localStorage.clear();
