@@ -15,6 +15,7 @@ function addNewItem() {
     itemList.unshift(item);
     const itemEl = createItemEl(item);
     itemsEl.prepend(itemEl);
+    saveChange();
 }
 
 function createNewItem() {
@@ -22,6 +23,14 @@ function createNewItem() {
         id: crypto.randomUUID(),
         text: '',
         complete: false
+    }
+}
+
+function createItem(id, text, completed) {
+    return {
+        id: id,
+        text: text,
+        complete: completed
     }
 }
 
@@ -68,6 +77,7 @@ function switchComplete(item, itemEl, checkBoxButtonEl) {
 
     const prevSvgEl = Array.from(checkBoxButtonEl.children)[0];
     checkBoxButtonEl.replaceChild(getCheckBoxSvgElByComplete(item.complete), prevSvgEl);
+    saveChange();
 }
 
 function getCheckBoxSvgElByComplete(complete) {
@@ -81,10 +91,39 @@ function focusInput(inputEl) {
 function updateText(inputEl, item) {
     item.text = inputEl.value;
     // console.log(item.text);
+    saveChange();
 }
 
 function remove(itemEl, item) {
     itemEl.remove();
     itemList = itemList.filter(i => i !== item);
+    // console.log(item);
     // console.log(itemList);
+    saveChange();
+}
+
+// localStorage.clear();
+
+function saveChange() {
+    let data = itemList.map(JSON.stringify).join('|||||');
+    // console.log(data);
+    localStorage.setItem('itemList', data);
+    // console.log('saved', data);
+}
+
+window.onload = function() {
+    const data = localStorage.getItem('itemList');
+    // console.log(data)
+    if (!data) {
+        return;
+    }
+    const savedItemList = data.split('|||||').map(JSON.parse);
+    // console.log(savedItemList);
+
+    itemList = savedItemList;
+    for (let item of savedItemList) {
+        const itemEl = createItemEl(item);
+        itemsEl.prepend(itemEl);
+    }
+    // console.log("item",itemList)
 }
