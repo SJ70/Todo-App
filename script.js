@@ -38,9 +38,13 @@ function createItemEl(item) {
     const inputEl = document.createElement('input');
     inputEl.type = 'text';
     inputEl.value = item.text;
+    inputEl.tabIndex = -1;
+    inputEl.addEventListener('mousedown', (e) => e.preventDefault());
+    inputEl.addEventListener('input', () => updateText(inputEl, item));
 
     const editButtonEl = document.createElement('button');
     editButtonEl.append(getEditSvgEl());
+    editButtonEl.addEventListener('click', () => focusInput(inputEl));
 
     const deleteButtonEl = document.createElement('button');
     deleteButtonEl.append(getDeleteSvgEl());
@@ -67,4 +71,13 @@ function switchComplete(item, itemEl, checkBoxButtonEl) {
 
 function getCheckBoxSvgElByComplete(complete) {
     return complete ? getCheckBoxSvgEl() : getCheckBoxBlankSvgEl()
+}
+
+function focusInput(inputEl) {
+    inputEl.focus();
+}
+
+function updateText(inputEl, item) {
+    item.text = inputEl.value;
+    // console.log(item.text);
 }
