@@ -49,7 +49,7 @@ function createItemEl(item) {
     inputEl.value = item.text;
     inputEl.tabIndex = -1;
     inputEl.addEventListener('mousedown', (e) => e.preventDefault());
-    inputEl.addEventListener('input', () => updateText(inputEl, item));
+    inputEl.addEventListener('blur', () => updateText(inputEl, item));
 
     const editButtonEl = document.createElement('button');
     editButtonEl.append(getEditSvgEl());
