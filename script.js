@@ -21,16 +21,9 @@ function addNewItem() {
 function createNewItem() {
     return {
         id: crypto.randomUUID(),
+        date: new Date().getTime(),
         text: '',
         complete: false
-    }
-}
-
-function createItem(id, text, completed) {
-    return {
-        id: id,
-        text: text,
-        complete: completed
     }
 }
 
@@ -102,8 +95,6 @@ function remove(itemEl, item) {
     saveChange();
 }
 
-// localStorage.clear();
-
 function saveChange() {
     let data = itemList.map(JSON.stringify).join('|||||');
     // console.log(data);
@@ -120,10 +111,12 @@ window.onload = function() {
     const savedItemList = data.split('|||||').map(JSON.parse);
     // console.log(savedItemList);
 
-    itemList = savedItemList;
+    itemList = savedItemList.sort((i1, i2) => - i1.date + i2.date);
     for (let item of savedItemList) {
         const itemEl = createItemEl(item);
-        itemsEl.prepend(itemEl);
+        itemsEl.append(itemEl);
     }
-    // console.log("item",itemList)
+    console.log("item",itemList)
 }
+
+// localStorage.clear();
