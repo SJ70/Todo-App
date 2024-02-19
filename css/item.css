@@ -54,6 +54,6 @@
     fill: var(--red);
 }
 
-.item.incomplete {
+.item.complete {
     opacity: 50%;
 }
