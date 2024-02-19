@@ -31,7 +31,9 @@ function createItemEl(item) {
     itemEl.classList.add(item.complete ? 'complete' : 'incomplete');
 
     const checkBoxButtonEl = document.createElement('button');
-    checkBoxButtonEl.append(item.complete ? getCheckBoxSvgEl() : getCheckBoxBlankSvgEl());
+    const checkBoxSvgEl = getCheckBoxSvgElByComplete(item.complete);
+    checkBoxButtonEl.append(checkBoxSvgEl);
+    checkBoxButtonEl.addEventListener('click', () => switchComplete(item, itemEl, checkBoxButtonEl));
 
     const inputEl = document.createElement('input');
     inputEl.type = 'text';
@@ -49,4 +51,20 @@ function createItemEl(item) {
     itemEl.append(deleteButtonEl);
 
     return itemEl;
+}
+
+function switchComplete(item, itemEl, checkBoxButtonEl) {
+    item.complete = !item.complete;
+    // console.log(item.complete);
+
+    const classFrom = item.complete ? 'incomplete' : 'complete';
+    const classTo = item.complete ? 'complete' : 'incomplete';
+    itemEl.classList.replace(classFrom, classTo);
+
+    const prevSvgEl = Array.from(checkBoxButtonEl.children)[0];
+    checkBoxButtonEl.replaceChild(getCheckBoxSvgElByComplete(item.complete), prevSvgEl);
+}
+
+function getCheckBoxSvgElByComplete(complete) {
+    return complete ? getCheckBoxSvgEl() : getCheckBoxBlankSvgEl()
 }
