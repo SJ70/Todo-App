@@ -1,0 +1,26 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 0.5em 1em 0.5em;
+    
+    user-select: none;
+    
+    color: var(--white);
+}
+
+header h3 {
+    margin: 0;
+}
+
+header button {
+    color: var(--white);
+    border-bottom: solid 1px var(--white);
+    transition: all 0.5s;
+}
+
+header button:hover {
+    color: var(--red);
+    border-bottom: solid 1px var(--red);
+}
