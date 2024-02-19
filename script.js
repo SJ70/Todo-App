@@ -48,6 +48,7 @@ function createItemEl(item) {
 
     const deleteButtonEl = document.createElement('button');
     deleteButtonEl.append(getDeleteSvgEl());
+    deleteButtonEl.addEventListener('click', () => remove(itemEl, item));
 
     itemEl.append(checkBoxButtonEl);
     itemEl.append(inputEl);
@@ -80,4 +81,10 @@ function focusInput(inputEl) {
 function updateText(inputEl, item) {
     item.text = inputEl.value;
     // console.log(item.text);
+}
+
+function remove(itemEl, item) {
+    itemEl.remove();
+    itemList = itemList.filter(i => i !== item);
+    // console.log(itemList);
 }
