@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/header.css">
         <link rel="stylesheet" type="text/css" href="css/item.css">
+        <script type="module" src="script.js"></script>
     </head>
     <body>
 
@@ -16,13 +17,13 @@
             <h3>
                 Todo 앱
             </h3>
-            <button>
+            <button id="create-btn">
                 새로운 TODO 추가하기
             </button>
         </header>
 
         <main>
-            <ul class="items">
+            <ul id="items" class="items">
                 <li class="item incomplete">
                     <button>
                         <svg id="svg" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Z"/></svg>
