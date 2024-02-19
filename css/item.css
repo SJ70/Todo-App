@@ -57,3 +57,7 @@
 .item.complete {
     opacity: 50%;
 }
+
+.item.complete input {
+    text-decoration: line-through;
+}
