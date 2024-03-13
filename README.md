@@ -1,4 +1,4 @@
-> 👉 [배포 페이지 바로가기](https://sj70.github.io/Todo_App/)
+> 👉 [배포 페이지 바로가기](https://sj70.github.io/todo_app/)
 
 # 02. 자바스크립트를 이용해서 Todo 앱 만들기
 
